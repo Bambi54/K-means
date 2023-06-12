@@ -40,16 +40,16 @@ public class Main {
 
         for (int i = 0; i < 100; i++) {
 
-            for (List<Double> elem : data) {
+            for (List<Double> point : data) {
 
                 List<Double> distances = new ArrayList<>();
 
                 for (List<Double> centroid: centroids)
-                    distances.add(distance(elem, centroid));
+                    distances.add(distance(point, centroid));
 
                 double min = distances.stream().min(Double::compare).get();
 
-                groups.put(elem, distances.indexOf(min));
+                groups.put(point, distances.indexOf(min));
 
             }
 
@@ -89,8 +89,8 @@ public class Main {
                                 .map(Map.Entry::getKey)
                                 .collect(Collectors.toList());
 
-                for (List<Double> elem : keyList)
-                    distsum = distsum.add(BigDecimal.valueOf(distance(centroid, elem)));
+                for (List<Double> point : keyList)
+                    distsum = distsum.add(BigDecimal.valueOf(distance(point, centroid)));
 
             }
 
@@ -110,8 +110,6 @@ public class Main {
 
 
         }
-
-
 
     }
 
@@ -139,7 +137,7 @@ public class Main {
 
             for (List<Double> elem : elems)
                 mean += elem.get(i);
-            
+
             BigDecimal bd = BigDecimal.valueOf(mean / elems.size());
             bd = bd.setScale(2, RoundingMode.HALF_UP);
             res.add(bd.doubleValue());
